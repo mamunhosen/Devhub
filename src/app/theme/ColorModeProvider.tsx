@@ -2,7 +2,7 @@ import React, { useMemo, useState, useCallback } from "react";
 
 import { ThemeProvider, CssBaseline } from "@mui/material";
 
-import { createAppTheme } from "./theme";
+import { createAppTheme } from "./createTheme";
 import { ColorModeContext, type ColorMode } from "./ColorModeContext";
 
 const getSystemColorMode = (): ColorMode => {

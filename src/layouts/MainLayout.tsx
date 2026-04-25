@@ -1,10 +1,12 @@
-import { Outlet, NavLink } from "react-router-dom";
+import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import { Box, IconButton } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LogoutIcon from "@mui/icons-material/Logout";
 
-import { useColorMode } from "@/app/useColorMode";
+import { useColorMode } from "@/app/theme";
+import { useAuth } from "@/app/auth";
 
 const Root = styled(Box)({
   minHeight: "100vh",
@@ -51,8 +53,15 @@ const Main = styled("main")(({ theme }) => ({
 
 const MainLayout = () => {
   const { mode, toggleMode } = useColorMode();
+  const { logout } = useAuth();
+  const navigate = useNavigate();
 
   const isDark = mode === "dark";
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
 
   return (
     <Root>
@@ -69,6 +78,10 @@ const MainLayout = () => {
           {/* Color Mode Toggle */}
           <IconButton onClick={toggleMode} color="inherit" sx={{ ml: 1 }}>
             {isDark ? <LightModeIcon /> : <DarkModeIcon />}
+          </IconButton>
+
+          <IconButton onClick={handleLogout} color="inherit" title="Logout">
+            <LogoutIcon />
           </IconButton>
         </Nav>
       </Header>

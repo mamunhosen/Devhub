@@ -23,7 +23,8 @@ interface ApiError {
 }
 
 const Signup = () => {
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -45,10 +46,11 @@ const Signup = () => {
 
     try {
       const response = await apiClient<SignupResponse>({
-        url: "/auth/signup",
+        url: "/auth/register",
         method: "POST",
         data: {
-          name,
+          firstName,
+          lastName,
           email,
           password,
         },
@@ -79,12 +81,16 @@ const Signup = () => {
         </Typography>
       )}
       <Input
-        label="Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
+        label="First Name"
+        value={firstName}
+        onChange={(e) => setFirstName(e.target.value)}
         required
-        loading={loading}
-        formControlProps={{ margin: "normal" }}
+      />
+      <Input
+        label="Last Name"
+        value={lastName}
+        onChange={(e) => setLastName(e.target.value)}
+        required
       />
       <Input
         label="Email"
@@ -92,8 +98,6 @@ const Signup = () => {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
-        loading={loading}
-        formControlProps={{ margin: "normal" }}
       />
       <Input
         label="Password"
@@ -101,8 +105,6 @@ const Signup = () => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         required
-        loading={loading}
-        formControlProps={{ margin: "normal" }}
       />
       <Input
         label="Confirm Password"
@@ -110,8 +112,6 @@ const Signup = () => {
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
         required
-        loading={loading}
-        formControlProps={{ margin: "normal" }}
       />
       <Button
         fullWidth

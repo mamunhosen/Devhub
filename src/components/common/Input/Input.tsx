@@ -1,10 +1,10 @@
 import React from "react";
-import { FormControl, InputAdornment } from "@mui/material";
+import { InputAdornment } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 
 // local
 import { type AppInputProps } from "./Input.types";
-import { StyledInputBase } from "./Input.styles";
+import { StyledFormControl, StyledInputBase } from "./Input.styles";
 import FormLabel from "./FormLabel";
 import FormHelperText from "./FormHelperText";
 import ProgressBar from "./ProgressBar";
@@ -23,12 +23,10 @@ const AppInput: React.FC<AppInputProps> = ({
   const isFieldDisabled = disabled || loading;
 
   return (
-    <FormControl
-      fullWidth
+    <StyledFormControl
       error={error}
       disabled={isFieldDisabled}
       {...formControlProps}
-      sx={{ position: "relative", ...formControlProps?.sx }}
     >
       {label && <FormLabel error={error}>{label}</FormLabel>}
 
@@ -54,7 +52,7 @@ const AppInput: React.FC<AppInputProps> = ({
       {helperText && (
         <FormHelperText error={error}>{helperText}</FormHelperText>
       )}
-    </FormControl>
+    </StyledFormControl>
   );
 };
 

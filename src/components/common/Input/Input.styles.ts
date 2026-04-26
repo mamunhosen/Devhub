@@ -1,4 +1,10 @@
-import { InputBase, styled, alpha } from "@mui/material";
+import { InputBase, styled, alpha, FormControl } from "@mui/material";
+
+export const StyledFormControl = styled(FormControl)(({ theme }) => ({
+  width: "100%",
+  position: "relative",
+  marginBottom: theme.spacing(1),
+}));
 
 export const StyledInputBase = styled(InputBase)(({ theme, error }) => ({
   "& .MuiInputBase-input": {
@@ -21,7 +27,9 @@ export const StyledInputBase = styled(InputBase)(({ theme, error }) => ({
     ]),
     "&:focus": {
       boxShadow: `${alpha(error ? theme.palette.error.main : theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
-      borderColor: error ? theme.palette.error.main : theme.palette.primary.main,
+      borderColor: error
+        ? theme.palette.error.main
+        : theme.palette.primary.main,
     },
   },
   "&.Mui-disabled": {

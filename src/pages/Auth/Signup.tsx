@@ -81,18 +81,21 @@ const Signup = () => {
         </Typography>
       )}
       <Input
+        name="firstName"
         label="First Name"
         value={firstName}
         onChange={(e) => setFirstName(e.target.value)}
         required
       />
       <Input
+        name="lastName"
         label="Last Name"
         value={lastName}
         onChange={(e) => setLastName(e.target.value)}
         required
       />
       <Input
+        name="email"
         label="Email"
         type="email"
         value={email}
@@ -100,6 +103,7 @@ const Signup = () => {
         required
       />
       <Input
+        name="password"
         label="Password"
         type="password"
         value={password}
@@ -107,6 +111,7 @@ const Signup = () => {
         required
       />
       <Input
+        name="confirmPassword"
         label="Confirm Password"
         type="password"
         value={confirmPassword}

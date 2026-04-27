@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Typography, Box, Link } from "@mui/material";
+import { Typography, Box, Link, InputAdornment } from "@mui/material";
+import { Email, Lock } from "@mui/icons-material";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
 
@@ -67,20 +68,30 @@ const Login = () => {
         </Typography>
       )}
       <Input
+        name="email"
         label="Email"
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+        startAdornment={
+          <InputAdornment position="start" color="action">
+            <Email />
+          </InputAdornment>
+        }
         required
-        formControlProps={{ margin: "normal" }}
       />
       <Input
+        name="password"
         label="Password"
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        startAdornment={
+          <InputAdornment position="start" color="action">
+            <Lock />
+          </InputAdornment>
+        }
         required
-        formControlProps={{ margin: "normal" }}
       />
       <Button
         fullWidth

@@ -1,5 +1,6 @@
 import React from "react";
-import { FormHelperTextProps } from "@mui/material";
+import { type FormHelperTextProps } from "@mui/material";
+
 import { StyledFormHelperText } from "./FormHelperText.styles";
 
 const AppFormHelperText: React.FC<FormHelperTextProps> = (props) => {

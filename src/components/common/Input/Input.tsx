@@ -18,9 +18,11 @@ const AppInput: React.FC<AppInputProps> = ({
   startAdornment,
   endAdornment,
   formControlProps,
+  name,
   ...rest
 }) => {
   const isFieldDisabled = disabled || loading;
+  const id = name ? `${name}-input` : undefined;
 
   return (
     <StyledFormControl
@@ -28,10 +30,15 @@ const AppInput: React.FC<AppInputProps> = ({
       disabled={isFieldDisabled}
       {...formControlProps}
     >
-      {label && <FormLabel error={error}>{label}</FormLabel>}
+      {label && (
+        <FormLabel error={error} htmlFor={id}>
+          {label}
+        </FormLabel>
+      )}
 
       <StyledInputBase
         {...rest}
+        id={id}
         error={error}
         disabled={isFieldDisabled}
         startAdornment={startAdornment}

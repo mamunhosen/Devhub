@@ -6,49 +6,56 @@ export const StyledFormControl = styled(FormControl)(({ theme }) => ({
   marginBottom: theme.spacing(1),
 }));
 
-export const StyledInputBase = styled(InputBase)(({ theme, error }) => ({
-  "& .MuiInputBase-input": {
-    borderRadius: theme.shape.borderRadius,
-    position: "relative",
-    backgroundColor: theme.palette.mode === "light" ? "#F3F6F9" : "#1A2027",
+export const StyledInputBase = styled(InputBase)(
+  ({ theme: { spacing, palette, shape, typography, transitions }, error }) => ({
+    borderRadius: shape.borderRadius,
+    backgroundColor: palette.mode === "light" ? "#F3F6F9" : "#1A2027",
     border: "1px solid",
     borderColor: error
-      ? theme.palette.error.main
-      : theme.palette.mode === "light"
+      ? palette.error.main
+      : palette.mode === "light"
         ? "#E0E3E7"
         : "#2D3843",
-    fontSize: 16,
-    width: "100%",
-    padding: "10px 12px",
-    transition: theme.transitions.create([
+    transition: transitions.create([
       "border-color",
       "background-color",
       "box-shadow",
     ]),
-    "&:focus": {
-      boxShadow: `${alpha(error ? theme.palette.error.main : theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
-      borderColor: error
-        ? theme.palette.error.main
-        : theme.palette.primary.main,
+
+    "&.Mui-focused": {
+      boxShadow: `${alpha(
+        error ? palette.error.main : palette.primary.main,
+        0.25,
+      )} 0 0 0 0.2rem`,
+      borderColor: error ? palette.error.main : palette.primary.main,
     },
-  },
-  "&.Mui-disabled": {
-    "& .MuiInputBase-input": {
-      backgroundColor: theme.palette.action.disabledBackground,
+
+    "&.Mui-disabled": {
+      backgroundColor: palette.action.disabledBackground,
       cursor: "not-allowed",
     },
-  },
-  // When using adornments, we need to adjust the padding and border
-  "&.MuiInputBase-adornedStart": {
-    paddingLeft: theme.spacing(1),
-  },
-  "&.MuiInputBase-adornedEnd": {
-    paddingRight: theme.spacing(1),
-  },
-  "& .MuiInputBase-inputAdornedStart": {
-    paddingLeft: theme.spacing(1),
-  },
-  "& .MuiInputBase-inputAdornedEnd": {
-    paddingRight: theme.spacing(1),
-  },
-}));
+
+    "& .MuiInputBase-input": {
+      fontSize: typography.pxToRem(16),
+      width: "100%",
+      padding: spacing(1.25),
+      "&.Mui-disabled": {
+        cursor: "not-allowed",
+      },
+    },
+
+    // When using adornments, we need to adjust the padding
+    "&.MuiInputBase-adornedStart": {
+      paddingLeft: spacing(1.5),
+    },
+    "&.MuiInputBase-adornedEnd": {
+      paddingRight: spacing(1.5),
+    },
+    "& .MuiInputBase-inputAdornedStart": {
+      paddingLeft: spacing(1),
+    },
+    "& .MuiInputBase-inputAdornedEnd": {
+      paddingRight: spacing(1),
+    },
+  }),
+);

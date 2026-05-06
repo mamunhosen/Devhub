@@ -46,7 +46,7 @@ export interface SingleSelectProps extends BaseSelectProps {
 }
 
 export interface MultiSelectProps extends BaseSelectProps {
-  multiple?: true;
+  multiple: true;
   value?: SelectValue[];
   onChange: (value: SelectValue[]) => void;
 }

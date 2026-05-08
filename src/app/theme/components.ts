@@ -40,4 +40,11 @@ export default {
       ],
     },
   },
+  MuiFormLabel: {
+    styleOverrides: {
+      asterisk: {
+        color: "#db3131",
+      },
+    },
+  },
 };

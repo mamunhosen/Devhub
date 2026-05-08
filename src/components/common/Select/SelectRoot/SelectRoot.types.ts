@@ -32,8 +32,7 @@ interface BaseSelectProps {
   disabled?: boolean;
   fullWidth?: boolean;
 
-  id?: string;
-  name?: string;
+  name: string;
   required?: boolean;
 
   isCancellable?: boolean;

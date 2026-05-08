@@ -19,6 +19,7 @@ const AppInput: React.FC<AppInputProps> = ({
   endAdornment,
   formControlProps,
   name,
+  required,
   ...rest
 }) => {
   const isFieldDisabled = disabled || loading;
@@ -31,7 +32,7 @@ const AppInput: React.FC<AppInputProps> = ({
       {...formControlProps}
     >
       {label && (
-        <FormLabel error={error} htmlFor={id}>
+        <FormLabel error={error} htmlFor={id} required={required}>
           {label}
         </FormLabel>
       )}
@@ -52,6 +53,7 @@ const AppInput: React.FC<AppInputProps> = ({
             )}
           </>
         }
+        required={required}
       />
 
       {loading && <ProgressBar color={error ? "error" : "primary"} />}

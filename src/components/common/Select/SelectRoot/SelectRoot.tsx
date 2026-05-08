@@ -16,6 +16,7 @@ import FormHelperText from "../../FormHelperText";
 
 export const SelectRoot: React.FC<SelectProps> = ({
   options,
+  name,
   value,
   onChange,
   multiple = false,
@@ -37,13 +38,13 @@ export const SelectRoot: React.FC<SelectProps> = ({
   helperText,
   disabled = false,
   fullWidth = true,
-  id,
   required = false,
   isCancellable = true,
   listMaxNoOfItems = 5,
 }) => {
   const hasValue = Array.isArray(value) ? value.length > 0 : !!value;
   const shouldRenderCancelButton = isCancellable && hasValue;
+  const id = `${name}-select`;
 
   const dropdown = useSelectDropdown(disabled);
   const { searchTerm, handleSearchChange, filteredOptions } = useSelectSearch(
@@ -74,7 +75,7 @@ export const SelectRoot: React.FC<SelectProps> = ({
       required={required}
     >
       {label && (
-        <FormLabel error={error} htmlFor={id}>
+        <FormLabel error={error} htmlFor={id} required={required}>
           {label}
         </FormLabel>
       )}
@@ -86,6 +87,7 @@ export const SelectRoot: React.FC<SelectProps> = ({
           }
         >
           <SelectTrigger
+            id={id}
             onClick={dropdown.open}
             selectedOptions={selectedOptions}
             multiple={multiple}

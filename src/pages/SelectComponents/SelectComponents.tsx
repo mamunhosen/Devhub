@@ -31,15 +31,18 @@ const SelectComponents: React.FC = () => {
     <Grid container sx={{ width: "100%" }} spacing={2}>
       <Grid size={{ xs: 12, md: 3 }} component="div">
         <PaginatedSelect
+          name="organizationCursor"
           datasetKey={ORGANIZATIONS_CURSOR}
           label="Paginate organizations(cursor)"
           value={selectedOrganization}
           onChange={handleOrganizationChange}
           debounceMs={500}
+          required
         />
       </Grid>
       <Grid size={{ xs: 12, md: 3 }} component="div">
         <PaginatedSelect
+          name="organizationOffset"
           datasetKey={ORGANIZATIONS_OFFSET}
           label="Paginate organizations(offset)"
           value={selectedOrganization}
@@ -49,6 +52,7 @@ const SelectComponents: React.FC = () => {
       </Grid>
       <Grid size={{ xs: 12, md: 4 }} component="div">
         <SelectDataSource
+          name="branch"
           datasetKey={BRANCES}
           label="Select branch"
           onChange={setSelectedBranch}

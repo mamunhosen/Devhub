@@ -5,6 +5,7 @@ import type { SelectOption } from "../SelectRoot.types";
 import { SelectCancelableIcon } from "./SelectCancelableIcon";
 
 interface SelectTriggerProps {
+  id: string;
   onClick: () => void;
   selectedOptions: SelectOption | SelectOption[] | null | undefined;
   multiple: boolean;
@@ -19,6 +20,7 @@ interface SelectTriggerProps {
 }
 
 export const SelectTrigger: React.FC<SelectTriggerProps> = ({
+  id,
   onClick,
   selectedOptions,
   multiple,
@@ -36,6 +38,7 @@ export const SelectTrigger: React.FC<SelectTriggerProps> = ({
     hasError={error}
     isDisabled={disabled}
     hasLabel={hasLabel}
+    id={id}
   >
     {loading && <ProgressBar color={error ? "error" : "primary"} />}
     <SelectValue

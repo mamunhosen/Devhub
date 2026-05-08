@@ -3,8 +3,6 @@ import { useState, useMemo } from "react";
 import { useDataset, type UseDatasetOptions } from "@/libs/datasets";
 import { type DatasetKey } from "@/libs/datasets/registry";
 
-import { useDebounce } from "@/libs/hooks";
-
 import {
   SelectRoot,
   type SingleSelectProps,
@@ -18,7 +16,6 @@ type WithDataSource<T> = Omit<
 > & {
   datasetKey: DatasetKey;
   searchKey?: string;
-  debounceMs?: number;
   queryOptions?: UseDatasetOptions;
 };
 
@@ -27,16 +24,9 @@ type SelectRemoteSearchProps =
   | WithDataSource<MultiSelectProps>;
 
 export const SelectRemoteSearch = (props: SelectRemoteSearchProps) => {
-  const {
-    datasetKey,
-    debounceMs,
-    searchKey = "search",
-    queryOptions,
-    ...rest
-  } = props;
+  const { datasetKey, searchKey = "search", queryOptions, ...rest } = props;
 
   const [search, setSearch] = useState<string>("");
-  const debouncedSearch = useDebounce(search, debounceMs);
 
   const finalQueryOptions = useMemo<UseDatasetOptions>(() => {
     const { params: queryParams = {}, ...queryRest } = queryOptions ?? {};
@@ -45,10 +35,10 @@ export const SelectRemoteSearch = (props: SelectRemoteSearchProps) => {
       ...queryRest,
       params: {
         ...queryParams,
-        [searchKey]: debouncedSearch,
+        [searchKey]: search,
       },
     };
-  }, [queryOptions, searchKey, debouncedSearch]);
+  }, [queryOptions, searchKey, search]);
 
   const { data, isLoading } = useDataset<SelectOption[]>(
     datasetKey,

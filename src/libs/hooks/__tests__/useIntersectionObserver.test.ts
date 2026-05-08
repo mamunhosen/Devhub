@@ -1,5 +1,6 @@
 import { renderHook, act } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
+
 import { useIntersectionObserver } from "../useIntersectionObserver";
 
 describe("useIntersectionObserver", () => {
@@ -22,7 +23,7 @@ describe("useIntersectionObserver", () => {
   it("should not observe if shouldObserve is false", () => {
     const onIntersect = vi.fn();
     const { result } = renderHook(() =>
-      useIntersectionObserver({ shouldObserve: false, onIntersect })
+      useIntersectionObserver({ shouldObserve: false, onIntersect }),
     );
 
     const div = document.createElement("div");
@@ -34,7 +35,7 @@ describe("useIntersectionObserver", () => {
   it("should observe if shouldObserve is true", () => {
     const onIntersect = vi.fn();
     const { result } = renderHook(() =>
-      useIntersectionObserver({ shouldObserve: true, onIntersect })
+      useIntersectionObserver({ shouldObserve: true, onIntersect }),
     );
 
     const div = document.createElement("div");
@@ -45,7 +46,9 @@ describe("useIntersectionObserver", () => {
 
   it("should call onIntersect when element is intersecting", () => {
     let intersectionCallback: IntersectionObserverCallback | undefined;
-    window.IntersectionObserver = vi.fn().mockImplementation(function (callback: IntersectionObserverCallback) {
+    window.IntersectionObserver = vi.fn().mockImplementation(function (
+      callback: IntersectionObserverCallback,
+    ) {
       intersectionCallback = callback;
       return {
         observe: mockObserve,
@@ -56,7 +59,7 @@ describe("useIntersectionObserver", () => {
 
     const onIntersect = vi.fn();
     const { result } = renderHook(() =>
-      useIntersectionObserver({ shouldObserve: true, onIntersect })
+      useIntersectionObserver({ shouldObserve: true, onIntersect }),
     );
 
     const div = document.createElement("div");
@@ -65,7 +68,10 @@ describe("useIntersectionObserver", () => {
     // Simulate intersection
     act(() => {
       if (intersectionCallback) {
-        intersectionCallback([{ isIntersecting: true } as IntersectionObserverEntry], {} as IntersectionObserver);
+        intersectionCallback(
+          [{ isIntersecting: true } as IntersectionObserverEntry],
+          {} as IntersectionObserver,
+        );
       }
     });
 
@@ -74,7 +80,9 @@ describe("useIntersectionObserver", () => {
 
   it("should not call onIntersect when element is not intersecting", () => {
     let intersectionCallback: IntersectionObserverCallback | undefined;
-    window.IntersectionObserver = vi.fn().mockImplementation(function (callback: IntersectionObserverCallback) {
+    window.IntersectionObserver = vi.fn().mockImplementation(function (
+      callback: IntersectionObserverCallback,
+    ) {
       intersectionCallback = callback;
       return {
         observe: mockObserve,
@@ -85,7 +93,7 @@ describe("useIntersectionObserver", () => {
 
     const onIntersect = vi.fn();
     const { result } = renderHook(() =>
-      useIntersectionObserver({ shouldObserve: true, onIntersect })
+      useIntersectionObserver({ shouldObserve: true, onIntersect }),
     );
 
     const div = document.createElement("div");
@@ -94,7 +102,10 @@ describe("useIntersectionObserver", () => {
     // Simulate non-intersection
     act(() => {
       if (intersectionCallback) {
-        intersectionCallback([{ isIntersecting: false } as IntersectionObserverEntry], {} as IntersectionObserver);
+        intersectionCallback(
+          [{ isIntersecting: false } as IntersectionObserverEntry],
+          {} as IntersectionObserver,
+        );
       }
     });
 
@@ -103,7 +114,7 @@ describe("useIntersectionObserver", () => {
 
   it("should disconnect on unmount", () => {
     const { result, unmount } = renderHook(() =>
-      useIntersectionObserver({ shouldObserve: true, onIntersect: vi.fn() })
+      useIntersectionObserver({ shouldObserve: true, onIntersect: vi.fn() }),
     );
 
     const div = document.createElement("div");
@@ -116,7 +127,7 @@ describe("useIntersectionObserver", () => {
 
   it("should disconnect previous observer when target node changes", () => {
     const { result } = renderHook(() =>
-      useIntersectionObserver({ shouldObserve: true, onIntersect: vi.fn() })
+      useIntersectionObserver({ shouldObserve: true, onIntersect: vi.fn() }),
     );
 
     const div1 = document.createElement("div");

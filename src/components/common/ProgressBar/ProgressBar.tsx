@@ -1,5 +1,6 @@
 import React from "react";
-import { LinearProgressProps } from "@mui/material";
+import type { LinearProgressProps } from "@mui/material";
+
 import { StyledProgressBar } from "./ProgressBar.styles";
 
 const AppProgressBar: React.FC<LinearProgressProps> = (props) => {

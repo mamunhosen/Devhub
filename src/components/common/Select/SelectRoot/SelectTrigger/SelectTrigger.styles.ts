@@ -8,8 +8,7 @@ export const SelectInputBox = styled(Box, {
   hasError?: boolean;
   isDisabled?: boolean;
   hasLabel?: boolean;
-}>(({ theme, hasError, isDisabled, hasLabel }) => ({
-  marginTop: hasLabel ? theme.spacing(2) : 0,
+}>(({ theme, hasError, isDisabled }) => ({
   border: `1px solid ${hasError ? theme.palette.error.main : theme.palette.divider}`,
   borderRadius: theme.shape.borderRadius,
   padding: theme.spacing(1.5),

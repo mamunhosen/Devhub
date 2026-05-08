@@ -1,34 +1,38 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
+
+import { useDebounce } from "@/libs/hooks";
 
 import type { SelectOption } from "../SelectRoot.types";
 
 export const useSelectSearch = (
   options: SelectOption[],
-  searchFromServer: boolean,
+  searchFromServer: boolean = false,
   onSearch?: (searchTerm: string) => void,
+  debounceMs: number = 300,
 ) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
 
-  const handleSearchChange = useCallback(
-    (value: string) => {
-      setSearchTerm(value);
+  const debouncedSearchTerm = useDebounce(searchTerm, debounceMs);
 
-      if (searchFromServer && onSearch) {
-        onSearch(value);
-      }
-    },
-    [searchFromServer, onSearch],
-  );
+  const handleSearchChange = useCallback((value: string) => {
+    setSearchTerm(value);
+  }, []);
 
   const filteredOptions = useMemo(() => {
-    if (searchFromServer || !searchTerm) {
+    if (searchFromServer || !debouncedSearchTerm) {
       return options;
     }
 
     return options.filter((option) =>
-      option.label.toLowerCase().includes(searchTerm.toLowerCase()),
+      option.label.toLowerCase().includes(debouncedSearchTerm.toLowerCase()),
     );
-  }, [options, searchTerm, searchFromServer]);
+  }, [options, debouncedSearchTerm, searchFromServer]);
+
+  useEffect(() => {
+    if (searchFromServer && onSearch) {
+      onSearch(debouncedSearchTerm);
+    }
+  }, [debouncedSearchTerm, searchFromServer, onSearch]);
 
   return {
     searchTerm,

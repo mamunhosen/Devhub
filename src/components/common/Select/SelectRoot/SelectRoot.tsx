@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  FormControl,
-  InputLabel,
-  FormHelperText,
-  ClickAwayListener,
-} from "@mui/material";
+import { FormControl, ClickAwayListener } from "@mui/material";
 
 import type { SelectProps } from "./SelectRoot.types";
 import {
@@ -13,10 +8,11 @@ import {
   useSelectController,
   useSelectDropdown,
 } from "./hooks";
-
 import { SelectContainer } from "./SelectRoot.styles";
 import { SelectTrigger } from "./SelectTrigger";
 import { Menu } from "./Menu";
+import FormLabel from "../../FormLabel";
+import FormHelperText from "../../FormHelperText";
 
 export const SelectRoot: React.FC<SelectProps> = ({
   options,
@@ -28,10 +24,11 @@ export const SelectRoot: React.FC<SelectProps> = ({
   allowCreateOption = false,
   loading = false,
   onLoadMore,
-  onSearch,
   hasMore = false,
   isFetchingNextPage = false,
-  searchFromServer = false,
+  searchFromServer,
+  debounceMs,
+  onSearch,
   onCreateOption,
   createOptionLabel,
   label,
@@ -53,6 +50,7 @@ export const SelectRoot: React.FC<SelectProps> = ({
     options,
     searchFromServer,
     onSearch,
+    debounceMs,
   );
   const { selectedValues, selectedOptions } = useSelectValue(
     value,
@@ -76,9 +74,9 @@ export const SelectRoot: React.FC<SelectProps> = ({
       required={required}
     >
       {label && (
-        <InputLabel shrink htmlFor={id}>
+        <FormLabel error={error} htmlFor={id}>
           {label}
-        </InputLabel>
+        </FormLabel>
       )}
 
       <ClickAwayListener onClickAway={dropdown.close}>
@@ -124,7 +122,9 @@ export const SelectRoot: React.FC<SelectProps> = ({
         </SelectContainer>
       </ClickAwayListener>
 
-      {helperText && <FormHelperText>{helperText}</FormHelperText>}
+      {helperText && (
+        <FormHelperText error={error}>{helperText}</FormHelperText>
+      )}
     </FormControl>
   );
 };

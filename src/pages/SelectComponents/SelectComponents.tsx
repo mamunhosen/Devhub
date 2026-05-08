@@ -35,6 +35,7 @@ const SelectComponents: React.FC = () => {
           label="Paginate organizations(cursor)"
           value={selectedOrganization}
           onChange={handleOrganizationChange}
+          debounceMs={500}
         />
       </Grid>
       <Grid size={{ xs: 12, md: 3 }} component="div">
@@ -43,6 +44,7 @@ const SelectComponents: React.FC = () => {
           label="Paginate organizations(offset)"
           value={selectedOrganization}
           onChange={handleOrganizationChange}
+          debounceMs={500}
         />
       </Grid>
       <Grid size={{ xs: 12, md: 4 }} component="div">

@@ -5,9 +5,9 @@ import LockIcon from "@mui/icons-material/Lock";
 // local
 import { type AppInputProps } from "./Input.types";
 import { StyledFormControl, StyledInputBase } from "./Input.styles";
-import FormLabel from "./FormLabel";
-import FormHelperText from "./FormHelperText";
-import ProgressBar from "./ProgressBar";
+import FormLabel from "../FormLabel";
+import FormHelperText from "../FormHelperText";
+import ProgressBar from "../ProgressBar";
 
 const AppInput: React.FC<AppInputProps> = ({
   label,

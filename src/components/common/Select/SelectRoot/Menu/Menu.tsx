@@ -1,10 +1,9 @@
 import { Popper, Grow } from "@mui/material";
 
-import ProgressLoader from "@/components/common/ProgressLoader";
-
 import { MenuPaper } from "./Menu.styles";
 import { SearchField } from "./SearchField";
 import { OptionList } from "./OptionList";
+import ProgressBar from "../../../ProgressBar";
 import { CreateOptionAction } from "./CreateOptionAction";
 import type { MenuProps } from "./Menu.types";
 
@@ -57,7 +56,7 @@ export const Menu: React.FC<MenuProps> = ({
               listMaxNoOfItems={listMaxNoOfItems}
             />
 
-            <ProgressLoader loading={isFetchingNextPage} />
+            {isFetchingNextPage && <ProgressBar />}
             {allowCreateOption && onCreateOption && (
               <CreateOptionAction
                 onClick={onCreateOption}

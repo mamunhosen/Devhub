@@ -1,6 +1,5 @@
-import ProgressLoader from "@/components/common/ProgressLoader";
-
 import { SelectInputBox } from "./SelectTrigger.styles";
+import ProgressBar from "../../../ProgressBar";
 import { SelectValue } from "./SelectValue";
 import type { SelectOption } from "../SelectRoot.types";
 import { SelectCancelableIcon } from "./SelectCancelableIcon";
@@ -38,7 +37,7 @@ export const SelectTrigger: React.FC<SelectTriggerProps> = ({
     isDisabled={disabled}
     hasLabel={hasLabel}
   >
-    <ProgressLoader loading={loading} />
+    {loading && <ProgressBar color={error ? "error" : "primary"} />}
     <SelectValue
       selectedOptions={selectedOptions}
       multiple={multiple}

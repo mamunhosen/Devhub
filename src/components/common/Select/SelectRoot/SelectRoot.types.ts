@@ -19,6 +19,7 @@ interface BaseSelectProps {
   onLoadMore?: () => void;
 
   searchFromServer?: boolean;
+  debounceMs?: number;
   onSearch?: (searchTerm: string) => void;
 
   onCreateOption?: () => void;

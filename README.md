@@ -1,73 +1,88 @@
-# React + TypeScript + Vite
+# DevHub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern React application built with TypeScript, Vite, Material UI (MUI), and TanStack Query. This project focuses on a modular architecture, reusable UI components, and a robust data-fetching layer.
 
-Currently, two official plugins are available:
+## 🚀 Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Framework:** [React 19](https://react.dev/)
+- **Build Tool:** [Vite](https://vitejs.dev/)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **UI Library:** [Material UI (MUI) v7](https://mui.com/)
+- **Data Fetching:** [TanStack Query v5](https://tanstack.com/query/latest)
+- **Styling:** Emotion (Styled Components)
+- **Routing:** [React Router v7](https://reactrouter.com/)
+- **Testing:** [Vitest](https://vitest.dev/) & [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+- **API Client:** Axios
 
-## React Compiler
+## 📂 Project Structure
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```text
+src/
+├── app/              # Global providers (Auth, Theme, QueryClient)
+├── assets/           # Static assets (fonts, images)
+├── components/       # Reusable UI components (Input, Select, Button, etc.)
+├── layouts/          # Layout wrappers (MainLayout with responsive header)
+├── libs/             # Core libraries (apiClient, dataset hooks, utilities)
+│   ├── apiClient/    # Axios instance with interceptors (Auth)
+│   ├── datasets/     # Abstracted data fetching layer (registry, hooks)
+│   └── hooks/        # Shared React hooks (useDebounce, useVirtualizer)
+├── pages/            # Feature-based page components
+├── routes/           # Route definitions and configuration
+└── test/             # Global test setup
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## ✨ Key Features
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **Modular Layout**: Responsive `MainLayout` with a sticky header and mobile-friendly drawer navigation.
+- **Dataset System**: An abstracted layer built on top of TanStack Query that handles both regular and infinite (cursor/offset) pagination with centralized configuration.
+- **Advanced UI Components**:
+  - Custom `AppInput` with built-in loading states, security icons, and refined styling for adornments.
+  - Paginated and remote-search `Select` components.
+- **Theme System**: Custom MUI theme with Raleway font integration and dark/light mode support.
+- **Authentication**: Built-in auth context with token refresh logic via Axios interceptors.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🛠️ Getting Started
+
+### Installation
+
+```bash
+npm install
 ```
+
+### Development
+
+```bash
+npm run dev
+```
+
+### Build
+
+```bash
+npm run build
+```
+
+### Testing
+
+Run all tests:
+
+```bash
+npm test
+```
+
+Run tests in UI mode:
+
+```bash
+npx vitest --ui
+```
+
+## 🧪 Testing Policy
+
+The project uses **Vitest** for unit and integration testing. We prioritize:
+
+- **Hook Testing**: Ensuring data fetching and debouncing logic is robust.
+- **Component Testing**: Verifying UI behavior, accessibility, and visual states.
+- **Mocking**: Using `vi.mock` for external dependencies (API client, registries) to ensure isolated tests.
+
+---
+
+Built with ❤️ by the Mamun Hosen.

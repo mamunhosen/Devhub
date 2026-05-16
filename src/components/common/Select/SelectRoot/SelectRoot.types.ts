@@ -7,6 +7,8 @@ export interface SelectOption {
 export type SelectValue = string | number;
 
 interface BaseSelectProps {
+  name: string;
+  required?: boolean;
   options: SelectOption[];
 
   searchable?: boolean;
@@ -31,9 +33,6 @@ interface BaseSelectProps {
   helperText?: string;
   disabled?: boolean;
   fullWidth?: boolean;
-
-  name: string;
-  required?: boolean;
 
   isCancellable?: boolean;
   listMaxNoOfItems?: number;

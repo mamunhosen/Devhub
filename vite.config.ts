@@ -17,4 +17,16 @@ export default defineConfig({
     setupFiles: "./src/test/setup.ts",
     css: true,
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          // Check if the module is inside node_modules
+          if (id.includes("node_modules")) {
+            return "vendor"; // groups everything into vendor.[hash].js
+          }
+        },
+      },
+    },
+  },
 });
